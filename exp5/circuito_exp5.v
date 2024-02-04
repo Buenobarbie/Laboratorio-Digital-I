@@ -80,7 +80,7 @@ hexa7seg HEX1(
 // Display2 -----------------------------------
 hexa7seg HEX2(
 	.hexa(jogada_out),
-	.display(db_jogada)
+	.display(db_jogadafeita)
 );
 
 // Display5 -----------------------------------

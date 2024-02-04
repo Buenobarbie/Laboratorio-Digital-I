@@ -64,7 +64,7 @@ module exp5_unidade_controle (
 
         // Saida de depuracao (estado)
         case (Eatual)
-            inicial:       db_estado = incial;         // 0
+            inicial:       db_estado = inicial;         // 0
             preparacao:    db_estado = preparacao;     // 1
             espera_jogada: db_estado = espera_jogada;  // 2
             registra:      db_estado = registra;       // 4
