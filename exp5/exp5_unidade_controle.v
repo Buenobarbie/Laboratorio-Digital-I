@@ -1,18 +1,19 @@
 
-module desafio4_unidade_controle (
+module exp5_unidade_controle (
     input      clock,
     input      reset,
     input      iniciar,
-    input      fimC,
-    input      errou,
-    input      pulso,
+    input      fim,
+    input      jogada,
+    input      igual,
     output reg zeraC,
     output reg contaC,
     output reg zeraR,
     output reg registraR,
+    output reg acertou,
+    output reg errou,
     output reg pronto,
-    output reg [3:0] db_estado,
-    output reg acertou
+    output reg [3:0] db_estado
 );
 
     // Define estados
@@ -38,13 +39,13 @@ module desafio4_unidade_controle (
 
     // Logica de proximo estado
     always @* begin
-        case (Eatual)
+        case (Eatual) 
             inicial:       Eprox = iniciar ? preparacao : inicial;
             preparacao:    Eprox = espera_jogada;
-            espera_jogada: Eprox = (pulso) ? registra : espera_jogada;
+            espera_jogada: Eprox = (jogada) ? registra : espera_jogada;
             registra:      Eprox = comparacao;
-            comparacao:    Eprox = (errou) ? fim_errou : (fimC) ? fim_acertou : proximo;
-            proximo:       Eprox = registra;
+            comparacao:    Eprox = (~igual) ? fim_errou : (fim) ? fim_acertou : proximo;
+            proximo:       Eprox = espera_jogada;
             fim_errou:     Eprox = (iniciar) ? preparacao : fim_errou;
             fim_acertou:   Eprox = (iniciar) ? preparacao : fim_acertou;
             default:       Eprox = inicial;
@@ -59,18 +60,20 @@ module desafio4_unidade_controle (
         contaC    = (Eatual == proximo) ? 1'b1 : 1'b0;
         pronto    = (Eatual == fim_acertou || Eatual == fim_errou) ? 1'b1 : 1'b0;
         acertou   = (Eatual == fim_acertou) ? 1'b1 : 1'b0;
+        errou     = (Eatual == fim_errou) ? 1'b1 : 1'b0;
 
         // Saida de depuracao (estado)
         case (Eatual)
-            inicial:     db_estado = 4'b0000;  // 0
-            preparacao:  db_estado = 4'b0001;  // 1
-            registra:    db_estado = 4'b0100;  // 4
-            comparacao:  db_estado = 4'b0101;  // 5
-            proximo:     db_estado = 4'b0110;  // 6
-            fim_errou:   db_estado = 4'b1100;  // C
-            fim_acertou: db_estado = 4'b1101;  // D
+            inicial:       db_estado = incial;         // 0
+            preparacao:    db_estado = preparacao;     // 1
+            espera_jogada: db_estado = espera_jogada;  // 2
+            registra:      db_estado = registra;       // 4
+            comparacao:    db_estado = comparacao;     // 5
+            proximo:       db_estado = proximo;        // 6
+            fim_errou:     db_estado = fim_errou;      // E
+            fim_acertou:   db_estado = fim_acertou;    // A
             
-            default:     db_estado = 4'b1111;  // F
+            default:       db_estado = 4'b1111;        // F
         endcase
     end
 

@@ -1,45 +1,20 @@
 module circuito_exp5 (
- input clock,
- input reset,
- input iniciar,
- input [3:0] chaves,
- output acertou,
- output errou,
- output pronto,
+ input        clock,
+ input        reset,
+ input        iniciar,
+ input  [3:0] chaves,
+ output       acertou,
+ output       errou,
+ output       pronto,
  output [3:0] leds,
- output db_igual,
+ output       db_igual,
  output [6:0] db_contagem,
  output [6:0] db_memoria,
  output [6:0] db_estado,
  output [6:0] db_jogadafeita,
- output db_clock,
- output db_iniciar,
- output db_tem_jogada
-);
-
-endmodule
-
-
-
-
-
-module circuito_exp4_desafio(
-input        clock,
-input        reset,
-input        iniciar,
-input [3:0]  chaves,
-output       pronto,
-output       acertou,
-output       errou,
-output       db_igual,
-output       db_iniciar,
-output [6:0] db_contagem,
-output [6:0] db_memoria,
-output [6:0] db_chaves,
-output [6:0] db_estado,
-output       db_fimC,
-output       db_contaC,
-output       db_zeraC
+ output       db_clock,
+ output       db_iniciar,
+ output       db_tem_jogada  
 );
 
 wire fimC;
@@ -47,42 +22,47 @@ wire contaC;
 wire zeraC;
 wire zeraR;
 wire registraR;
+wire jogada_feita;
+wire igual;
 
 wire [3:0] estado_out;
 wire [3:0] contagem_out;
-wire [3:0] chaves_out;
+wire [3:0] jogada_out;
 wire [3:0] memoria_out;
 
 // Unidade de controle ------------------------------
-desafio4_unidade_controle unidade_controle(
-	.clock(clock),
-	.reset(reset),
-	.iniciar(iniciar),
-	.fimC(fimC),
-	.errou(errou),
-	.zeraC(zeraC),
-	.contaC(contaC),
-	.zeraR(zeraR),
-	.registraR(registraR),
-	.pronto(pronto),
-	.db_estado(estado_out),
-	.acertou(acertou)
+exp5_unidade_controle unidade_controle(
+	.clock     (clock),
+	.reset     (reset),
+	.iniciar   (iniciar),
+	.fim       (fimC),
+    .jogada    (jogada_feita),
+	.igual     (igual), 
+	.zeraC     (zeraC),
+	.contaC    (contaC),
+	.zeraR     (zeraR),
+	.registraR (registraR),
+    .acertou   (acertou),
+    .errou     (errou),
+	.pronto    (pronto),
+	.db_estado (estado_out)
 ); 
 
 // Fluxo de Dados ------------------------------
-desafio4_fluxo_dados fluxo_dados (
-	.clock(clock),
-	.chaves(chaves),
-	.zeraR(zeraR),
-	.registraR(registraR), 
-	.contaC(contaC),
-	.zeraC(zeraC),
-	.chavesIgualMemoria(db_igual),
-	.fimC(fimC),
-	.db_contagem(contagem_out),
-	.db_chaves(chaves_out),
-	.db_memoria(memoria_out),
-	.errou(errou)
+exp5_fluxo_dados fluxo_dados (
+	.clock         (clock),
+	.zeraC         (zeraC),
+	.contaC        (contaC),
+	.zeraR     (zeraR),
+	.registraR    (registraR), 
+	.chaves       (chaves),
+	.igual        (igual),
+	.fimC         (fimC),
+    .jogada_feita (jogada_feita),
+    .db_tem_jogada(db_tem_jogada),
+	.db_contagem  (contagem_out),
+	.db_memoria   (memoria_out),
+	.db_jogada    (jogada_out)
 );
 
 // Display0 -----------------------------------
@@ -99,8 +79,8 @@ hexa7seg HEX1(
 
 // Display2 -----------------------------------
 hexa7seg HEX2(
-	.hexa(chaves_out),
-	.display(db_chaves)
+	.hexa(jogada_out),
+	.display(db_jogada)
 );
 
 // Display5 -----------------------------------
@@ -109,10 +89,11 @@ hexa7seg HEX5(
 	.display(db_estado)
 );
 
+assign db_igual = igual;
+assign db_clock = clock;
 assign db_iniciar = iniciar;
-assign db_zeraC   = zeraC;
-assign db_contaC  = contaC;
-assign db_fimC    = fimC;
+
+assign leds = chaves;
 
 endmodule
 
