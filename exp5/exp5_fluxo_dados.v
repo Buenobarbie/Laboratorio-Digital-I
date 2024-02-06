@@ -63,6 +63,7 @@ wire sinal;
 
   // Geração do sinal das chaves
   assign sinal = (chaves[0] ^ chaves[1] ^ chaves[2] ^ chaves[3]);
+  assign db_tem_jogada = sinal;
 
   // edge detector
     edge_detector edge_detector(
