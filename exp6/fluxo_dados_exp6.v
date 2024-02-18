@@ -1,15 +1,25 @@
 module fluxo_dados_exp6 (
 input        clock,
-input        zeraC,
-input        contaC,
+
+input        zeraE,
+input        contaE,
+output       fimE,
+
+input        contaRod,
+input        zeraRod,
+output       fimRod,
+
 input        zeraT,
 input        contaT,
+output       fimT,
+
 input        zeraR,
 input        registraR, 
+
 input [3:0]  chaves,
+
 output       igual,
-output       fimC,
-output       fimT,
+output       endIgualRod,
 output       db_meio,
 output       jogada_feita,
 output       db_tem_jogada,
@@ -19,33 +29,57 @@ output [3:0] db_jogada
 );
 
 wire [3:0] s_endereco;
-wire menor;
-wire maior;
+wire [3:0] s_rodada;
 wire [3:0] s_dado;
 wire [3:0] s_chaves;
 wire sinal;
+wire endIgualRod
 
-  // contador_163
-  contador_163 contador (
+  // contador do Endereco
+  contador_163 ContEnd (
     .CLK( clock ),
-    .CLR( zeraC ),
+    .CLR( zeraE ),
     .LD( 1'b1 ),
-    .ENP( contaC ),
+    .ENP( contaE ),
     .ENT( 1'b1 ),
     .D( 4'b0 ),
     .Q( s_endereco ),
-    .RCO( fimC )
+    .RCO( fimE )
+  );
+
+  // contador da Rodada
+  contador_163 ContRod (
+    .CLK( clock ),
+    .CLR( zeraRod ),
+    .LD( 1'b1 ),
+    .ENP( contaRod ),
+    .ENT( 1'b1 ),
+    .D( 4'b0 ),
+    .Q(s_rodada),
+    .RCO( fimRod )
   );
   
-  // comparador_85
-  comparador_85 comparador (
+  // Compara Rodada
+  comparador_85 comparadorR (
+    .A( s_rodada ),
+    .B( s_endereco ),
+    .ALBi( 1'b0 ),
+    .AGBi( 1'b0 ),
+    .AEBi( 1'b1 ),
+    .ALBo(  ),
+    .AGBo(  ),
+    .AEBo( endIgualRod )
+  );
+
+  // Compara Jogada
+  comparador_85 comparadorJ (
     .A( s_dado ),
     .B( s_chaves ),
     .ALBi( 1'b0 ),
     .AGBi( 1'b0 ),
     .AEBi( 1'b1 ),
-    .ALBo( menor ),
-    .AGBo( maior ),
+    .ALBo(  ),
+    .AGBo(  ),
     .AEBo( igual )
   );
   
@@ -86,7 +120,7 @@ wire sinal;
   // edge detector
     edge_detector edge_detector(
     .clock(clock),
-    .reset(zeraC),
+    .reset(zeraE),
     .sinal(sinal),
     .pulso(jogada_feita)
     );
