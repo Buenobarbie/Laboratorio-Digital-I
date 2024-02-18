@@ -59,10 +59,12 @@ wire sinal;
   );
   
   // memoria
-  sync_rom_16x4 memoria(
+  sync_ram_16x4_file memoria(
   .clock(clock),
-  .address(s_endereco),
-  .data_out(s_dado)
+  .we(1'b0),
+  .data(4'b0),
+  .addr(s_endereco),
+  .q(s_dado)
   );
 
   // temporizador (contador_M)
