@@ -18,7 +18,7 @@ module perdeu_circuito_exp6_tb;
     wire       pronto_out ;
     wire [3:0] leds_out   ;
 
-    wire       enderecoIgualRodada_out;
+    wire       db_enderecoIgualRodada_out;
     wire       db_timeout_out    ;
 
     wire       db_igual_out      ;
@@ -28,7 +28,6 @@ module perdeu_circuito_exp6_tb;
     wire [6:0] db_jogadafeita_out;
     wire [6:0] db_rodada_out     ;
     wire       db_clock_out      ;
-    wire       db_iniciar_out    ;
     wire       db_tem_jogada_out ;
 
     // Configuração do clock

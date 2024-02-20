@@ -1353,4 +1353,3 @@ module ganhou_circuito_exp6_tb;
       end
 
   endmodule
-    
