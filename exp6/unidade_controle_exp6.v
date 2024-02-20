@@ -54,7 +54,7 @@ module unidade_controle_exp6 (
         case (Eatual) 
             inicial:         Eprox = (iniciar) ? preparacao : inicial;
             preparacao:      Eprox = inicia_rodada; 
-            inicia_rodada:   Eprox = espera_jogada 
+            inicia_rodada:   Eprox = espera_jogada;
             espera_jogada:   Eprox = (jogada) ? registra : (fimT) ? fim_timeout : espera_jogada;
             registra:        Eprox = comparacao;
             comparacao:      Eprox = (~igual) ? fim_errou : (enderecoIgualRodada) ? ultima_rodada : proximo;
@@ -63,7 +63,7 @@ module unidade_controle_exp6 (
             proxima_rodada:  Eprox = inicia_rodada; 
             fim_errou:       Eprox = (iniciar) ? preparacao : fim_errou;
             fim_acertou:     Eprox = (iniciar) ? preparacao : fim_acertou;
-            fim_timeout      Eprox = (iniciar) ? preparacao : fim_timeout; 
+            fim_timeout:     Eprox = (iniciar) ? preparacao : fim_timeout; 
             default:         Eprox = inicial;
         endcase
     end
