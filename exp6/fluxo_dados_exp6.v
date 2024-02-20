@@ -87,7 +87,7 @@ wire sinal;
   
   // memoria
   sync_ram_16x4_file memoria(
-  .clock(clock),
+  .clk(clock),
   .we(1'b0),
   .data(4'b0),
   .addr(s_endereco),
