@@ -113,17 +113,25 @@ hexa7seg HEX2(
 	.display(db_jogadafeita)
 );
 
+// Display3 -----------------------------------
+hexa7seg HEX3(
+	.hexa(rodada_out),
+	.display(db_rodada)
+);
+
 // Display5 -----------------------------------
 hexa7seg HEX5(
 	.hexa(estado_out),
 	.display(db_estado)
 );
 
+assign db_enderecoIgualRodada = enderecoIgualRodada;
+
 assign db_igual = igual;
 assign db_clock = clock;
-assign db_iniciar = iniciar;
 
-assign leds = chaves;
+// LEDs indicam a posição lida na memória
+assign leds = memoria_out;
 
 endmodule
 
