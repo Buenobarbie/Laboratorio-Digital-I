@@ -19,7 +19,7 @@ input        registraR,
 input [3:0]  chaves,
 
 output       igual,
-output       endIgualRod,
+output       enderecoIgualRodada,
 output       db_meio,
 output       jogada_feita,
 output       db_tem_jogada,
@@ -33,7 +33,7 @@ wire [3:0] s_rodada;
 wire [3:0] s_dado;
 wire [3:0] s_chaves;
 wire sinal;
-wire endIgualRod
+wire enderecoIgualRodada
 
   // contador do Endereco
   contador_163 ContEnd (
@@ -68,7 +68,7 @@ wire endIgualRod
     .AEBi( 1'b1 ),
     .ALBo(  ),
     .AGBo(  ),
-    .AEBo( endIgualRod )
+    .AEBo( enderecoIgualRodada )
   );
 
   // Compara Jogada
