@@ -1314,7 +1314,7 @@ module ganhou_circuito_exp6_tb;
         #(10*clockPeriod);
 
         // Teste 133. Rodada #16 | jogada #13 | (ajustar chaves para 1000 por 10 periodos de clock)
-        caso = 120;
+        caso = 133;
         @(negedge clock_in);
         botoes_in = 4'b1000;
         #(10*clockPeriod);
@@ -1322,8 +1322,8 @@ module ganhou_circuito_exp6_tb;
         // espera entre jogadas
         #(10*clockPeriod);
         
-         // Teste 121. Rodada #16 | jogada #14 | (ajustar chaves para 1000 por 10 periodos de clock)
-        caso = 121;
+         // Teste 134. Rodada #16 | jogada #14 | (ajustar chaves para 1000 por 10 periodos de clock)
+        caso = 134;
         @(negedge clock_in);
         botoes_in = 4'b1000;
         #(10*clockPeriod);
@@ -1331,8 +1331,8 @@ module ganhou_circuito_exp6_tb;
         // espera entre jogadas
         #(10*clockPeriod);
 
-         // Teste 122. Rodada #16 | jogada #15 | (ajustar chaves para 0001 por 10 periodos de clock)
-        caso = 122;
+         // Teste 135. Rodada #16 | jogada #15 | (ajustar chaves para 0001 por 10 periodos de clock)
+        caso = 135;
         @(negedge clock_in);
         botoes_in = 4'b0001;
         #(10*clockPeriod);
@@ -1340,15 +1340,16 @@ module ganhou_circuito_exp6_tb;
         // espera entre jogadas
         #(10*clockPeriod);
 
-        // Teste 122. Rodada #16 | jogada #16 | (ajustar chaves para 0100 por 10 periodos de clock)
-        caso = 122;
+        // Teste 136. Rodada #16 | jogada #16 | (ajustar chaves para 0100 por 10 periodos de clock)
+        caso = 136;
         @(negedge clock_in);
         botoes_in = 4'b0100;
         #(10*clockPeriod);
         botoes_in = 4'b0000;
         // espera entre jogadas
-        #(10*clockPeriod);
+        #(10*clockPeriod);  
         
+        // ---------------- FIM -----------------
       end
 
   endmodule
