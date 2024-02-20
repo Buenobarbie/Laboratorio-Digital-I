@@ -75,7 +75,7 @@ module unidade_controle_exp6 (
         zeraRod   = (Eatual == inicial || Eatual == preparacao) ? 1'b1 : 1'b0;
         zeraT     = (Eatual == inicial || Eatual == preparacao || Eatual== proximo) ? 1'b1 : 1'b0;
         registraR = (Eatual == registra) ? 1'b1 : 1'b0;
-        contaE    = (Eatual = proximo) ? 1'b1 : 1'b0;
+        contaE    = (Eatual == proximo) ? 1'b1 : 1'b0;
         contaT    = (Eatual == espera_jogada) ? 1'b1 : 1'b0;
         contaRod  = (Eatual == proxima_rodada) ? 1'b1 : 1'b0;
         pronto    = (Eatual == fim_acertou || Eatual == fim_errou || Eatual == fim_timeout) ? 1'b1 : 1'b0;
