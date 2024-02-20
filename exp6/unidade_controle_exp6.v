@@ -87,7 +87,7 @@ module unidade_controle_exp6 (
         case (Eatual)
             inicial:         db_estado = inicial;         // 0
             preparacao:      db_estado = preparacao;      // 1
-            inicia_rodada:   db_estado = exibe_sequencia; // 2
+            inicia_rodada:   db_estado = inicia_rodada;   // 2
             espera_jogada:   db_estado = espera_jogada;   // 3
             registra:        db_estado = registra;        // 4
             comparacao:      db_estado = comparacao;      // 5
