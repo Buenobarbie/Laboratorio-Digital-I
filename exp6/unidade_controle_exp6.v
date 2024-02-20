@@ -91,7 +91,7 @@ module unidade_controle_exp6 (
             fim_timeout:     db_estado = fim_timeout;     // C
 
             
-            default:       db_estado = 4'b1111;        // F
+            default:       db_estado = 4'b1111;           // F
         endcase
     end
 
