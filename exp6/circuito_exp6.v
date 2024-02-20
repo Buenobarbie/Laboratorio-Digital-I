@@ -2,57 +2,70 @@ module circuito_exp6 (
  input        clock,
  input        reset,
  input        iniciar,
- input  [3:0] chaves,
- output       acertou,
- output       errou,
- output       pronto,
+ input  [3:0] botoes,
  output [3:0] leds,
- output       db_timeout,
- output       db_meio, 
+ output       pronto,
+ output       ganhou,
+ output       perdeu,
+ output       db_clock,
+ output       db_tem_jogada  ,
  output       db_igual,
+ output       db_enderecoIgualRodada,
+ output       db_timeout,
  output [6:0] db_contagem,
  output [6:0] db_memoria,
- output [6:0] db_estado,
  output [6:0] db_jogadafeita,
- output       db_clock,
- output       db_iniciar,
- output       db_tem_jogada  
+ output [6:0] db_rodada,
+ output [6:0] db_estado
 );
 
-wire fimC;
-wire contaC;
-wire zeraC;
+wire fimE;
+wire contaE;
+wire zeraE;
+
 wire zeraR;
+wire registraR;
+
 wire contaT;
 wire zeraT;
-wire registraR;
+wire fimT;
+
+wire contaRod;
+wire zeraRod;
+wire fimRod;
+
 wire jogada_feita;
 wire igual;
-wire fimT;
+wire enderecoIgualRodada;
 
 wire [3:0] estado_out;
 wire [3:0] contagem_out;
 wire [3:0] jogada_out;
 wire [3:0] memoria_out;
+wire [3:0] rodada_out;
 
 // Unidade de controle ------------------------------
 exp5_unidade_controle unidade_controle(
 	.clock     (clock),
 	.reset     (reset),
 	.iniciar   (iniciar),
-	.fim       (fimC),
+	.fimE       (fimE),
+	.fimRod     (fimRod),
+	.fimT       (fimT),
     .jogada    (jogada_feita),
 	.igual     (igual), 
-    .fimT      (fimT),
-	.zeraC     (zeraC),
-	.contaC    (contaC),
-    .zeraT     (zeraT),
-    .contaT    (contaT),
+	.enderecoIgualRodada (enderecoIgualRodada),
+	.zeraE     (zeraE),
+	.contaE    (contaE),
+	.zeraRod   (zeraRod),
+	.contaRod  (contaRod),
+	.zeraT     (zeraT),
+	.contaT    (contaT),
 	.zeraR     (zeraR),
 	.registraR (registraR),
+	.acertou   (ganhou),
+	.errou     (perdeu),
     .timeout   (db_timeout),
-    .acertou   (acertou),
-    .errou     (errou),
 	.pronto    (pronto),
 	.db_estado (estado_out)
 ); 
@@ -60,22 +73,26 @@ exp5_unidade_controle unidade_controle(
 // Fluxo de Dados ------------------------------
 exp5_fluxo_dados fluxo_dados (
 	.clock         (clock),
-	.zeraC         (zeraC),
-	.contaC        (contaC),
+	.zeraE         (zeraE),
+	.contaE        (contaE),
+	.contaRod      (contaRod),
+	.zeraRod       (zeraRod),
     .zeraT         (zeraT),
     .contaT        (contaT),
 	.zeraR         (zeraR),
 	.registraR     (registraR), 
-	.chaves        (chaves),
-	.igual         (igual),
-	.fimC          (fimC),
+	.chaves        (botoes),
+	.fimE          (fimE),
+	.fimRod        (fimRod),
     .fimT          (fimT),
-    .db_meio       (db_meio),
+	.igual         (igual),
+	.enderecoIgualRodada (enderecoIgualRodada),
     .jogada_feita  (jogada_feita),
     .db_tem_jogada (db_tem_jogada),
 	.db_contagem   (contagem_out),
 	.db_memoria    (memoria_out),
 	.db_jogada     (jogada_out)
+	.db_rodada	   (rodada_out)
 );
 
 // Display0 -----------------------------------

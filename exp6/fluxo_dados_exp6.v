@@ -1,31 +1,25 @@
 module fluxo_dados_exp6 (
 input        clock,
-
 input        zeraE,
 input        contaE,
-output       fimE,
-
 input        contaRod,
 input        zeraRod,
-output       fimRod,
-
 input        zeraT,
 input        contaT,
-output       fimT,
-
 input        zeraR,
 input        registraR, 
-
 input [3:0]  chaves,
-
+output       fimE,
+output       fimRod,
+output       fimT,
 output       igual,
 output       enderecoIgualRodada,
-output       db_meio,
 output       jogada_feita,
 output       db_tem_jogada,
 output [3:0] db_contagem,
 output [3:0] db_memoria,
 output [3:0] db_jogada
+output [3:0] db_rodada,
 );
 
 wire [3:0] s_endereco;
@@ -110,7 +104,7 @@ wire enderecoIgualRodada
     .conta(contaT),
     .Q(),
     .fim(fimT),
-    .meio(db_meio)
+    .meio()
   );
 
   // Geração do sinal das chaves
@@ -128,5 +122,6 @@ wire enderecoIgualRodada
 assign db_contagem = s_endereco;
 assign db_jogada   = s_chaves;
 assign db_memoria  = s_dado;
+assign db_rodada   = s_rodada;
 
 endmodule
