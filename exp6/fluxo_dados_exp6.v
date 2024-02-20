@@ -27,7 +27,7 @@ wire [3:0] s_rodada;
 wire [3:0] s_dado;
 wire [3:0] s_chaves;
 wire sinal;
-wire enderecoIgualRodada
+wire enderecoIgualRodada;
 
   // contador do Endereco
   contador_163 ContEnd (
