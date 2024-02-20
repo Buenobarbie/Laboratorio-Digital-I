@@ -91,7 +91,7 @@ exp5_fluxo_dados fluxo_dados (
     .db_tem_jogada (db_tem_jogada),
 	.db_contagem   (contagem_out),
 	.db_memoria    (memoria_out),
-	.db_jogada     (jogada_out)
+	.db_jogada     (jogada_out),
 	.db_rodada	   (rodada_out)
 );
 
