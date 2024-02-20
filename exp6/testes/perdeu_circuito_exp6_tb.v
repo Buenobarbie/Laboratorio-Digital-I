@@ -41,7 +41,7 @@ module perdeu_circuito_exp6_tb;
     always #((clockPeriod / 2)) clock_in = ~clock_in;
 
     // instanciacao do DUT (Device Under Test)
-    circuito_exp5 dut (
+    circuito_exp6 dut (
       .clock          ( clock_in    ),
       .reset          ( reset_in    ),
       .iniciar        ( iniciar_in  ),
@@ -59,7 +59,7 @@ module perdeu_circuito_exp6_tb;
       .db_memoria     ( db_memoria_out     ),
       .db_jogadafeita ( db_jogadafeita_out ),  
       .db_rodada      ( db_rodada_out      ),
-      .db_estado      ( db_estado_out      ),
+      .db_estado      ( db_estado_out      )
     );
 
     // geracao dos sinais de entrada (estimulos)
@@ -142,7 +142,7 @@ module perdeu_circuito_exp6_tb;
       botoes_in = 4'b0100;
       #(10*clockPeriod);
       botoes_in = 4'b0000;
-      // espera entre jogadas
+      // e0010spera entre jogadas
       #(10*clockPeriod);
 
       // -------------- FIM_PERDEU -----------------
