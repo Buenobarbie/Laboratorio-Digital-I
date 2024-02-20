@@ -18,8 +18,8 @@ output       jogada_feita,
 output       db_tem_jogada,
 output [3:0] db_contagem,
 output [3:0] db_memoria,
-output [3:0] db_jogada
-output [3:0] db_rodada,
+output [3:0] db_jogada,
+output [3:0] db_rodada
 );
 
 wire [3:0] s_endereco;
@@ -27,7 +27,6 @@ wire [3:0] s_rodada;
 wire [3:0] s_dado;
 wire [3:0] s_chaves;
 wire sinal;
-wire enderecoIgualRodada;
 
   // contador do Endereco
   contador_163 ContEnd (
