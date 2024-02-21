@@ -17,7 +17,6 @@ module unidade_controle_exp6 (
     output reg contaT,
     output reg zeraR,
     output reg registraR,
-    output reg we,
     output reg acertou,
     output reg errou,
     output reg timeout,
@@ -35,9 +34,6 @@ module unidade_controle_exp6 (
     parameter proximo         = 4'b0110;  // 6
     parameter ultima_rodada   = 4'b0111;  // 7 
     parameter proxima_rodada  = 4'b1000;  // 8
-    parameter espera_nova_jogada = 4'b1001;  // 9
-    parameter registra_nova_jogada = 4'b1011;  // B
-    parameter escreve_memoria = 4'b1101 ;  // D
     parameter fim_errou       = 4'b1110;  // E
     parameter fim_acertou     = 4'b1010;  // A  
     parameter fim_timeout     = 4'b1100;  // C
@@ -56,22 +52,19 @@ module unidade_controle_exp6 (
     // Logica de proximo estado 
     always @* begin
         case (Eatual) 
-            inicial:              Eprox = (iniciar) ? preparacao : inicial;
-            preparacao:           Eprox = inicia_rodada; 
-            inicia_rodada:        Eprox = espera_jogada;
-            espera_jogada:        Eprox = (jogada) ? registra : (fimT) ? fim_timeout : espera_jogada;
-            registra:             Eprox = comparacao;
-            comparacao:           Eprox = (~igual) ? fim_errou : (enderecoIgualRodada) ? ultima_rodada : proximo;
-            proximo:              Eprox = espera_jogada;
-            ultima_rodada:        Eprox = (fimRod) ? fim_acertou : espera_nova_jogada;
-            espera_nova_jogada:   Eprox = (jogada) ? registra_nova_jogada : (fimT) ? fim_timeout : espera_nova_jogada;
-            registra_nova_jogada: Eprox = escreve_memoria; 
-            escreve_memoria:      Eprox = proxima_rodada;
-            proxima_rodada:       Eprox = inicia_rodada; 
-            fim_errou:            Eprox = (iniciar) ? preparacao : fim_errou;
-            fim_acertou:          Eprox = (iniciar) ? preparacao : fim_acertou;
-            fim_timeout:          Eprox = (iniciar) ? preparacao : fim_timeout; 
-            default:              Eprox = inicial;
+            inicial:         Eprox = (iniciar) ? preparacao : inicial;
+            preparacao:      Eprox = inicia_rodada; 
+            inicia_rodada:   Eprox = espera_jogada;
+            espera_jogada:   Eprox = (jogada) ? registra : (fimT) ? fim_timeout : espera_jogada;
+            registra:        Eprox = comparacao;
+            comparacao:      Eprox = (~igual) ? fim_errou : (enderecoIgualRodada) ? ultima_rodada : proximo;
+            proximo:         Eprox = espera_jogada;
+            ultima_rodada:   Eprox = (fimRod) ? fim_acertou : proxima_rodada;
+            proxima_rodada:  Eprox = inicia_rodada; 
+            fim_errou:       Eprox = (iniciar) ? preparacao : fim_errou;
+            fim_acertou:     Eprox = (iniciar) ? preparacao : fim_acertou;
+            fim_timeout:     Eprox = (iniciar) ? preparacao : fim_timeout; 
+            default:         Eprox = inicial;
         endcase
     end
 
@@ -80,16 +73,15 @@ module unidade_controle_exp6 (
         zeraE     = (Eatual == inicial || Eatual == preparacao || Eatual == inicia_rodada) ? 1'b1 : 1'b0;
         zeraR     = (Eatual == inicial || Eatual == preparacao) ? 1'b1 : 1'b0;
         zeraRod   = (Eatual == inicial || Eatual == preparacao) ? 1'b1 : 1'b0;
-        zeraT     = (Eatual == inicial || Eatual == preparacao || Eatual== proximo || Eatual == ultima_rodada) ? 1'b1 : 1'b0;
-        registraR = (Eatual == registra || Eatual == registra_nova_jogada) ? 1'b1 : 1'b0;
-        contaE    = (Eatual == proximo || Eatual == ultima_rodada) ? 1'b1 : 1'b0;
-        contaT    = (Eatual == espera_jogada || Eatual == espera_nova_jogada) ? 1'b1 : 1'b0;
+        zeraT     = (Eatual == inicial || Eatual == preparacao || Eatual== proximo) ? 1'b1 : 1'b0;
+        registraR = (Eatual == registra) ? 1'b1 : 1'b0;
+        contaE    = (Eatual == proximo) ? 1'b1 : 1'b0;
+        contaT    = (Eatual == espera_jogada) ? 1'b1 : 1'b0;
         contaRod  = (Eatual == proxima_rodada) ? 1'b1 : 1'b0;
         pronto    = (Eatual == fim_acertou || Eatual == fim_errou || Eatual == fim_timeout) ? 1'b1 : 1'b0;
         acertou   = (Eatual == fim_acertou) ? 1'b1 : 1'b0;
         errou     = (Eatual == fim_errou) ? 1'b1 : 1'b0;
         timeout   = (Eatual == fim_timeout) ? 1'b1 : 1'b0; 
-        we        = (Eatual == escreve_memoria) ? 1'b1 : 1'b0;
 
         // Saida de depuracao (estado)
         case (Eatual)
@@ -102,12 +94,10 @@ module unidade_controle_exp6 (
             proximo:         db_estado = proximo;         // 6
             ultima_rodada:   db_estado = ultima_rodada;   // 7
             proxima_rodada:  db_estado = proxima_rodada;  // 8
-            espera_nova_jogada: db_estado = espera_nova_jogada; // 9
-            registra_nova_jogada: db_estado = registra_nova_jogada; // B
-            escreve_memoria: db_estado = escreve_memoria; // D
             fim_errou:       db_estado = fim_errou;       // E
             fim_acertou:     db_estado = fim_acertou;     // A
             fim_timeout:     db_estado = fim_timeout;     // C
+
             
             default:       db_estado = 4'b1111;           // F
         endcase
