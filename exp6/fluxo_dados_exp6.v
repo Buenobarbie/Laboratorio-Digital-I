@@ -9,6 +9,7 @@ input        contaT,
 input        zeraR,
 input        registraR, 
 input [3:0]  chaves,
+input        we,
 output       fimE,
 output       fimRod,
 output       fimT,
@@ -88,8 +89,8 @@ wire sinal;
   // memoria
   sync_ram_16x4_file memoria(
   .clk(clock),
-  .we(1'b0),
-  .data(4'b0),
+  .we(we),
+  .data(s_chaves),
   .addr(s_endereco),
   .q(s_dado)
   );

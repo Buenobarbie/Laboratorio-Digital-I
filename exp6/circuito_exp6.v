@@ -30,6 +30,8 @@ wire contaT;
 wire zeraT;
 wire fimT;
 
+wire we;
+
 wire contaRod;
 wire zeraRod;
 wire fimRod;
@@ -49,9 +51,9 @@ unidade_controle_exp6 unidade_controle(
 	.clock     (clock),
 	.reset     (reset),
 	.iniciar   (iniciar),
-	.fimE       (fimE),
-	.fimRod     (fimRod),
-	.fimT       (fimT),
+	.fimE      (fimE),
+	.fimRod    (fimRod),
+	.fimT      (fimT),
     .jogada    (jogada_feita),
 	.igual     (igual), 
 	.enderecoIgualRodada (enderecoIgualRodada),
@@ -63,6 +65,7 @@ unidade_controle_exp6 unidade_controle(
 	.contaT    (contaT),
 	.zeraR     (zeraR),
 	.registraR (registraR),
+	.we        (we),
 	.acertou   (ganhou),
 	.errou     (perdeu),
     .timeout   (db_timeout),
@@ -82,6 +85,7 @@ fluxo_dados_exp6 fluxo_dados (
 	.zeraR         (zeraR),
 	.registraR     (registraR), 
 	.chaves        (botoes),
+	.we            (we),
 	.fimE          (fimE),
 	.fimRod        (fimRod),
     .fimT          (fimT),
