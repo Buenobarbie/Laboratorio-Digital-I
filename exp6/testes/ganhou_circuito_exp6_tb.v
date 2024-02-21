@@ -54,7 +54,7 @@ module ganhou_circuito_exp6_tb;
       .db_memoria     ( db_memoria_out     ),
       .db_jogadafeita ( db_jogadafeita_out ),  
       .db_rodada      ( db_rodada_out      ),
-      .db_estado      ( db_estado_out      ),
+      .db_estado      ( db_estado_out      )
     );
 
     // geracao dos sinais de entrada (estimulos)
