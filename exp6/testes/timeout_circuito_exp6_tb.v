@@ -82,7 +82,7 @@ module perdeu_circuito_exp6_tb;
       #(clockPeriod);
       reset_in = 0;
       // espera
-      #(10*clockPeriod);
+      #(5*clockPeriod);
 
       // Teste 2. iniciar=1 por 5 periodos de clock
       caso = 2;
@@ -90,7 +90,7 @@ module perdeu_circuito_exp6_tb;
       #(5*clockPeriod);
       iniciar_in = 0;
       // espera
-      #(10*clockPeriod);
+      #(5*clockPeriod);
 
      // ---------------- RODADA 1 -----------------
 
@@ -98,10 +98,10 @@ module perdeu_circuito_exp6_tb;
       caso = 3;
       @(negedge clock_in);
       botoes_in = 4'b0001;
-      #(10*clockPeriod);
+      #(5*clockPeriod);
       botoes_in = 4'b0000;
       // espera entre jogadas
-      #(10*clockPeriod);
+      #(5*clockPeriod);
 
       // ---------------- RODADA 2 -----------------
 
@@ -112,7 +112,7 @@ module perdeu_circuito_exp6_tb;
       #(3500*clockPeriod);
       botoes_in = 4'b0000;
       // espera entre jogadas
-      #(10*clockPeriod);
+      #(5*clockPeriod);
 
     
 
