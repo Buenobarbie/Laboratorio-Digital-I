@@ -96,7 +96,7 @@ wire sinal;
 
   // temporizador (contador_M)
 
-  contador_m temporizador(
+  contador_m #(3000, 12)temporizador(
     .clock(clock),
     .zera_as(zeraT),
     .zera_s(zeraT),
@@ -113,7 +113,7 @@ wire sinal;
   // edge detector
     edge_detector edge_detector(
     .clock(clock),
-    .reset(zeraE),
+    .reset(zeraRod),
     .sinal(sinal),
     .pulso(jogada_feita)
     );
