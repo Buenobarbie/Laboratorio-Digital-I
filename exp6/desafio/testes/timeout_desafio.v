@@ -122,14 +122,12 @@ module timeout_circuito_exp6_tb;
       #(10*clockPeriod);
       botoes_in = 4'b0000;
       
-      // espera entre jogadas
-      #(3500*clockPeriod);
 
       // Teste 6. Rodada #2 | jogada #2 | (ajustar chaves para 0010 por 10 periodos de clock
       caso = 6;
       @(negedge clock_in);
-      botoes_in = 4'b0100;
-      #(10*clockPeriod);
+      botoes_in = 4'b0000;
+      #(3500*clockPeriod);
       botoes_in = 4'b0000;
       // espera entre jogadas
       #(10*clockPeriod);
