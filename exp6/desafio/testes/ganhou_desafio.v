@@ -39,24 +39,24 @@ module perdeu_circuito_exp6_tb;
     // Gerador de clock
     always #((clockPeriod / 2)) clock_in = ~clock_in;
 
-    // Vetor com a memória
-    reg [3:0] memoria [15:0] = 
-    {   4'b0001, 
-        4'b0010, 
-        4'b0100, 
-        4'b1000, 
-        4'b0100, 
-        4'b0010, 
-        4'b0001, 
-        4'b0001, 
-        4'b0010, 
-        4'b0010, 
-        4'b0100, 
-        4'b0100, 
-        4'b1000, 
-        4'b1000, 
-        4'b0001, 
-        4'b0100};
+    //Memoria
+    wire [3:0] memoria [15:0];
+    assign memoria[0] = 4'b0001,
+    memoria[1] = 4'b0010,
+    memoria[2] = 4'b0100,
+    memoria[3] = 4'b1000,
+    memoria[4] = 4'b0100,
+    memoria[5] = 4'b0010,
+    memoria[6] = 4'b0001,
+    memoria[7] = 4'b0001,
+    memoria[8] = 4'b0010,
+    memoria[9] = 4'b0010,
+    memoria[10] = 4'b0100,
+    memoria[11] = 4'b0100,
+    memoria[12] = 4'b1000,
+    memoria[13] = 4'b1000,
+    memoria[14] = 4'b0001,
+    memoria[15] = 4'b0100;
 
     // instanciacao do DUT (Device Under Test)
     circuito_exp6 dut (
