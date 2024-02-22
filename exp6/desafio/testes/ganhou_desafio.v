@@ -112,10 +112,34 @@ module perdeu_circuito_exp6_tb;
       #(10*clockPeriod);
 
       // -------------- LOOP DO JOGO ----------------
+      integer i, j;
       initial begin
-            for(i=0; i<10; i = i+1) begin
-            //coisas
+            // Loop das rodadas
+            for(i=0; i<16; i = i+1) begin
+
+                // Loop das jogadas
+                for(j=0; j<=i; j = j+1) begin
+                    caso = caso + 1;
+                    @(negedge clock_in);
+                    botoes_in = memoria[j];
+                    #(10*clockPeriod);
+                    botoes_in = 4'b0000;
+                    // espera entre jogadas
+                    #(10*clockPeriod);
+                end 
             end
+
+            if (i < 15) begin
+            // Insere nova jogada
+                    caso = caso + 1;
+                    @(negedge clock_in);
+                    botoes_in = memoria[15-i];
+                    #(10*clockPeriod);
+                    botoes_in = 4'b0000;
+                    // espera entre jogadas
+                    #(10*clockPeriod);
+            end
+           
         end
 
 
