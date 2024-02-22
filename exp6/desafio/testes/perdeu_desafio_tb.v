@@ -1,5 +1,5 @@
 /*
-  * Cenario de Teste 1 - Erra a segunda jogada da Rodada 2
+  * Cenario de Teste 2 - Erra a segunda jogada da Rodada 2
   */
 
 `timescale 1ns/1ns
