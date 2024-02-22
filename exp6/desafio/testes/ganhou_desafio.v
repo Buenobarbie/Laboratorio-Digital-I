@@ -40,7 +40,7 @@ module perdeu_circuito_exp6_tb;
     always #((clockPeriod / 2)) clock_in = ~clock_in;
 
     // Vetor com a memória
-    reg [3:0] memoria [0:15] = 
+    reg [3:0] memoria [15:0] = 
     {   4'b0001, 
         4'b0010, 
         4'b0100, 
@@ -80,6 +80,8 @@ module perdeu_circuito_exp6_tb;
       .db_estado      ( db_estado_out      )
     );
 
+    integer i, j;
+
     // geracao dos sinais de entrada (estimulos)
     initial begin
       $display("Inicio da simulacao");
@@ -112,37 +114,32 @@ module perdeu_circuito_exp6_tb;
       #(10*clockPeriod);
 
       // -------------- LOOP DO JOGO ----------------
-      integer i, j;
-      initial begin
-            // Loop das rodadas
-            for(i=0; i<16; i = i+1) begin
+      // Loop das rodadas
+      for(i=0; i<16; i = i+1) begin
 
-                // Loop das jogadas
-                for(j=0; j<=i; j = j+1) begin
-                    caso = caso + 1;
-                    @(negedge clock_in);
-                    botoes_in = memoria[j];
-                    #(10*clockPeriod);
-                    botoes_in = 4'b0000;
-                    // espera entre jogadas
-                    #(10*clockPeriod);
-                end 
-            end
+          // Loop das jogadas
+          for(j=0; j<=i; j = j+1) begin
+              caso = caso + 1;
+              @(negedge clock_in);
+              botoes_in = memoria[j];
+              #(10*clockPeriod);
+              botoes_in = 4'b0000;
+              // espera entre jogadas
+              #(10*clockPeriod);
+          end 
+      end
 
-            if (i < 15) begin
-            // Insere nova jogada
-                    caso = caso + 1;
-                    @(negedge clock_in);
-                    botoes_in = memoria[15-i];
-                    #(10*clockPeriod);
-                    botoes_in = 4'b0000;
-                    // espera entre jogadas
-                    #(10*clockPeriod);
-            end
-           
-        end
-
-
+      if (i < 15) begin
+      // Insere nova jogada
+              caso = caso + 1;
+              @(negedge clock_in);
+              botoes_in = memoria[15-i];
+              #(10*clockPeriod);
+              botoes_in = 4'b0000;
+              // espera entre jogadas
+              #(10*clockPeriod);
+      end
+      
       // final dos casos de teste da simulacao
       caso = 200;
       #100;
