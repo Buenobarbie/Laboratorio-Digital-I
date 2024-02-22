@@ -58,6 +58,25 @@ module perdeu_circuito_exp6_tb;
     memoria[14] = 4'b0001,
     memoria[15] = 4'b0100;
 
+    //Memoria
+    wire [3:0] memoria2 [15:0];
+    assign memoria2[0] = 4'b0001,
+    memoria2[1] = 4'b0100,
+    memoria2[2] = 4'b0001,
+    memoria2[3] = 4'b1000,
+    memoria2[4] = 4'b1000,
+    memoria2[5] = 4'b0100,
+    memoria2[6] = 4'b0100,
+    memoria2[7] = 4'b0010,
+    memoria2[8] = 4'b0010,
+    memoria2[9] = 4'b0001,
+    memoria2[10] = 4'b0001,
+    memoria2[11] = 4'b0010,
+    memoria2[12] = 4'b0100,
+    memoria2[13] = 4'b1000,
+    memoria2[14] = 4'b0100,
+    memoria2[15] = 4'b0100;
+
     // instanciacao do DUT (Device Under Test)
     circuito_exp6 dut (
       .clock          ( clock_in    ),
@@ -121,7 +140,7 @@ module perdeu_circuito_exp6_tb;
           for(j=0; j<=i; j = j+1) begin
               caso = caso + 1;
               @(negedge clock_in);
-              botoes_in = memoria[j];
+              botoes_in = memoria2[j];
               #(10*clockPeriod);
               botoes_in = 4'b0000;
               // espera entre jogadas
