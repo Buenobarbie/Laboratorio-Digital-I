@@ -4,7 +4,7 @@
 
 `timescale 1ns/1ns
 
-module perdeu_circuito_exp6_tb;
+module ganhou_circuito_exp6_tb;
 
     // Sinais para conectar com o DUT
     // valores iniciais para fins de simulacao (ModelSim)
@@ -157,7 +157,7 @@ module perdeu_circuito_exp6_tb;
                   // espera entre jogadas
                   #(10*clockPeriod);
           end
-          
+
       end
       
       // final dos casos de teste da simulacao
