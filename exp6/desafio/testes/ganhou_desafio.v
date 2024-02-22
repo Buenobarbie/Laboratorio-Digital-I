@@ -127,17 +127,18 @@ module perdeu_circuito_exp6_tb;
               // espera entre jogadas
               #(10*clockPeriod);
           end 
-      end
-
-      if (i < 15) begin
-      // Insere nova jogada
-              caso = caso + 1;
-              @(negedge clock_in);
-              botoes_in = memoria[15-i];
-              #(10*clockPeriod);
-              botoes_in = 4'b0000;
-              // espera entre jogadas
-              #(10*clockPeriod);
+      
+          if (i < 15) begin
+          // Insere nova jogada
+                  caso = caso + 1;
+                  @(negedge clock_in);
+                  botoes_in = memoria[15-i];
+                  #(10*clockPeriod);
+                  botoes_in = 4'b0000;
+                  // espera entre jogadas
+                  #(10*clockPeriod);
+          end
+          
       end
       
       // final dos casos de teste da simulacao
