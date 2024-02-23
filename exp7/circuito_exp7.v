@@ -1,4 +1,4 @@
-module circuito_exp6 (
+module circuito_exp7 (
  input        clock,
  input        reset,
  input        iniciar,
@@ -53,7 +53,7 @@ wire [3:0] memoria_out;
 wire [3:0] rodada_out;
 
 // Unidade de controle ------------------------------
-unidade_controle_exp6 unidade_controle(
+unidade_controle_exp7 unidade_controle(
 	.clock     (clock),
 	.reset     (reset),
 	.iniciar   (iniciar),
@@ -83,7 +83,7 @@ unidade_controle_exp6 unidade_controle(
 ); 
 
 // Fluxo de Dados ------------------------------
-fluxo_dados_exp6 fluxo_dados (
+fluxo_dados_exp7 fluxo_dados (
 	.clock         (clock),
 	.zeraE         (zeraE),
 	.contaE        (contaE),
@@ -148,8 +148,4 @@ assign db_enderecoIgualRodada = enderecoIgualRodada;
 assign db_igual = igual;
 assign db_clock = clock;
 
-
-
-
 endmodule
-
