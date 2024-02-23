@@ -1,5 +1,5 @@
 
-module unidade_controle_exp6 (
+module unidade_controle_exp7 (
     input      clock,
     input      reset,
     input      iniciar,
