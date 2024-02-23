@@ -62,9 +62,9 @@ module unidade_controle_exp7 (
     always @* begin
         case (Eatual) 
             inicial:              Eprox = (iniciar) ? preparacao : inicial;
-            preparacao:           Eprox = inicia_rodada; 
+            preparacao:           Eprox = exibe_jogada_inicial; 
             inicia_rodada:        Eprox = espera_jogada;
-            exibe_jogada_inicial: Eprox = (fimP) ? espera_jogada : exibe_jogada_inicial;
+            exibe_jogada_inicial: Eprox = (fimP) ? inicia_rodada : exibe_jogada_inicial;
             espera_jogada:        Eprox = (jogada) ? registra : (fimT) ? fim_timeout : espera_jogada;
             registra:             Eprox = comparacao;
             comparacao:           Eprox = (~igual) ? fim_errou : (enderecoIgualRodada) ? ultima_rodada : proximo;

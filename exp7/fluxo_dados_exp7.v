@@ -16,6 +16,7 @@ input        sinal_led,
 output       fimRod,
 output       fimT,
 output       fimP,
+output       fimE,
 output       igual,
 output       enderecoIgualRodada,
 output       jogada_feita,
@@ -136,7 +137,7 @@ wire sinal;
     );
 
     mux2x1_n multiplexador(
-      .D0(s_chaves),
+      .D0(chaves),
       .D1(s_dado),
       .SEL(sinal_led),
       .OUT(leds)
