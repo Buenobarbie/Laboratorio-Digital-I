@@ -1,4 +1,4 @@
-module fluxo_dados_exp6 (
+module fluxo_dados_exp7 (
 input        clock,
 input        zeraE,
 input        contaE,
