@@ -59,7 +59,7 @@ wire sinal;
     .RCO( fimRod )
   );
   
-  // Compara Rodada
+  // Compara Endereço e Rodada
   comparador_85 comparadorR (
     .A( s_rodada ),
     .B( s_endereco ),
@@ -71,7 +71,7 @@ wire sinal;
     .AEBo( enderecoIgualRodada )
   );
 
-  // Compara Jogada
+  // Compara Jogada feita e Saída de mamória
   comparador_85 comparadorJ (
     .A( s_dado ),
     .B( s_chaves ),
@@ -92,7 +92,7 @@ wire sinal;
   .Q(s_chaves)
   );
   
-  // memoria
+  // memoria RAM
   sync_ram_16x4_file memoria(
   .clk(clock),
   .we(we),
@@ -101,8 +101,8 @@ wire sinal;
   .q(s_dado)
   );
 
-  // temporizador (contador_M)
 
+  // temporizador de timeout (contador_M)
   contador_m #(5000, 13)temporizador(
     .clock(clock),
     .zera_as(zeraT),
@@ -113,7 +113,7 @@ wire sinal;
     .meio()
   );
 
-  // timer primeira jogada (contador_M)
+  // temporizador para exibir primeira jogada (contador_M)
   contador_m #(2000, 11)temporizador2(
     .clock(clock),
     .zera_as(zeraP),
@@ -136,6 +136,7 @@ wire sinal;
     .pulso(jogada_feita)
     );
 
+  // Multiplexador de saída dos LEDs
     mux2x1_n multiplexador(
       .D0(chaves),
       .D1(s_dado),
