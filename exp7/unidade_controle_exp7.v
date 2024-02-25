@@ -32,17 +32,17 @@ module unidade_controle_exp7 (
     // Define estados
     parameter inicial              = 4'b0000;  // 0
     parameter preparacao           = 4'b0001;  // 1
-    parameter exibe_jogada_inicial = 4'b1111;  // F
-    parameter inicia_rodada        = 4'b0010;  // 2
-    parameter espera_jogada        = 4'b0011;  // 3
-    parameter registra             = 4'b0100;  // 4
-    parameter comparacao           = 4'b0101;  // 5
-    parameter proximo              = 4'b0110;  // 6
-    parameter ultima_rodada        = 4'b0111;  // 7 
-    parameter proxima_rodada       = 4'b1000;  // 8
+    parameter exibe_jogada_inicial = 4'b0010;  // 2
+    parameter inicia_rodada        = 4'b0011;  // 3
+    parameter espera_jogada        = 4'b0100;  // 4
+    parameter registra             = 4'b0101;  // 5
+    parameter comparacao           = 4'b0110;  // 6
+    parameter proximo              = 4'b0111;  // 7 
+    parameter ultima_rodada        = 4'b1000;  // 8
     parameter espera_nova_jogada   = 4'b1001;  // 9
     parameter registra_nova_jogada = 4'b1011;  // B
     parameter escreve_memoria      = 4'b1101;  // D
+    parameter proxima_rodada       = 4'b1111;  // F
     parameter fim_errou            = 4'b1110;  // E
     parameter fim_acertou          = 4'b1010;  // A  
     parameter fim_timeout          = 4'b1100;  // C
@@ -119,7 +119,7 @@ module unidade_controle_exp7 (
             fim_acertou:          db_estado = fim_acertou;     // A
             fim_timeout:          db_estado = fim_timeout;     // C
             
-            default:       db_estado = 4'b1111;           // F
+            default:       db_estado = 4'b0000;           // 0
         endcase
     end
 
