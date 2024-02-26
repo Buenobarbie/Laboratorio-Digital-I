@@ -160,7 +160,9 @@ module ganhou_circuito_exp6_tb;
           end
 
       end
-      
+     
+      #(10*clockPeriod);
+     
       // final dos casos de teste da simulacao
       caso = 200;
       #100;
