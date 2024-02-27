@@ -4,7 +4,7 @@
 
 `timescale 1ns/1ns
 
-module ganhou_circuito_exp6_tb;
+module ganhou_circuito_exp7_tb;
 
     // Sinais para conectar com o DUT
     // valores iniciais para fins de simulacao (ModelSim)
@@ -78,7 +78,7 @@ module ganhou_circuito_exp6_tb;
     memoria2[15] = 4'b0100;
 
     // instanciacao do DUT (Device Under Test)
-    circuito_exp6 dut (
+    circuito_exp7 dut (
       .clock          ( clock_in    ),
       .reset          ( reset_in    ),
       .iniciar        ( iniciar_in  ),
