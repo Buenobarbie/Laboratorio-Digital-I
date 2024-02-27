@@ -70,6 +70,7 @@ unidade_controle_exp7 unidade_controle(
 	.zeraRod   (zeraRod),
 	.contaRod  (contaRod),
 	.zeraT     (zeraT),
+	.zeraP     (zeraP),
 	.contaT    (contaT),
 	.zeraR     (zeraR),
 	.registraR (registraR),

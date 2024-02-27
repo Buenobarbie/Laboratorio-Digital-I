@@ -111,8 +111,8 @@ module ganhou_circuito_exp7_tb;
       reset_in   = 0;
       iniciar_in = 0;
       botoes_in  = 4'b0000;
-      #clockPeriod;
-
+      
+      #(clockPeriod);
 
       // Teste 1. resetar circuito
       caso = 1;
@@ -127,10 +127,10 @@ module ganhou_circuito_exp7_tb;
       // Teste 2. iniciar=1 por 5 periodos de clock
       caso = 2;
       iniciar_in = 1;
-      #(10*clockPeriod);
+      #(5*clockPeriod);
       iniciar_in = 0;
       
-      // mostra primeira jogada 
+      // espera mostrar a primeira jogada 
       #(2000*clockPeriod);
 
       // -------------- LOOP DO JOGO ----------------
@@ -150,13 +150,13 @@ module ganhou_circuito_exp7_tb;
       
           if (i < 15) begin
           // Insere nova jogada
-                  caso = caso + 1;
-                  @(negedge clock_in);
-                  botoes_in = memoria[15-i];
-                  #(10*clockPeriod);
-                  botoes_in = 4'b0000;
-                  // espera entre jogadas
-                  #(10*clockPeriod);
+              caso = caso + 1;
+              @(negedge clock_in);
+              botoes_in = memoria[15-i];
+              #(10*clockPeriod);
+              botoes_in = 4'b0000;
+              // espera entre jogadas
+              #(10*clockPeriod);
           end
 
       end
