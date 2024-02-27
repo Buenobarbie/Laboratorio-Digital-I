@@ -79,7 +79,7 @@ unidade_controle_exp7 unidade_controle(
     .timeout   (db_timeout),
 	.pronto    (pronto),
 	.db_estado (estado_out),
-	.sinal_led (sinal_led), 
+	.sinal_led (sinal_led)
 ); 
 
 // Fluxo de Dados ------------------------------
