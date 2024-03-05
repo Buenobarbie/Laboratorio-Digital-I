@@ -128,7 +128,7 @@ module timeout_circuito_exp7_tb;
       caso = 6;
       @(negedge clock_in);
       botoes_in = 4'b0000;
-      #(3500*clockPeriod);
+     #(5500*clockPeriod);
       botoes_in = 4'b0000;
       // espera entre jogadas
       #(10*clockPeriod);
