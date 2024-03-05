@@ -31,7 +31,7 @@ module timeout_circuito_exp7_tb;
     wire       db_tem_jogada_out ;
 
     // Configuração do clock
-    parameter clockPeriod = 1000000; // in ns, f=10kHz
+    parameter clockPeriod = 20; // in ns, f=10kHz
 
     // Identificacao do caso de teste
     reg [31:0] caso = 0;
