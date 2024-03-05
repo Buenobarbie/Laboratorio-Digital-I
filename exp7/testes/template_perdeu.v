@@ -142,13 +142,13 @@ module template_perdeu;
       // -------------- LOOP DO JOGO ----------------
       // Loop das rodadas
       for(i=0; i<16; i = i+1) begin
-          rodada = i;
+          rodada = i+1;
           // Loop das jogadas
           for(j=0; j<=i; j = j+1) begin
 
               // PERDER
               if(i == rodadaPerder -1 && j == jogadaPerder - 1) begin
-                jogada = j;
+                jogada = j+1;
                 caso = caso + 1;
                 @(negedge clock_in);
                 botoes_in = botoes_perder;
@@ -162,7 +162,7 @@ module template_perdeu;
 		
               // JOGAR
 	      else begin
-              jogada = j;
+              jogada = j+1;
               caso = caso + 1;
               @(negedge clock_in);
               botoes_in = memoria2[j];
