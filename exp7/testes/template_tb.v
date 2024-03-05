@@ -4,7 +4,7 @@
 
 `timescale 1ns/1ns
 
-module ganhou_circuito_exp7_tb;
+module template_tb;
 
     // Sinais para conectar com o DUT
     // valores iniciais para fins de simulacao (ModelSim)
@@ -31,7 +31,7 @@ module ganhou_circuito_exp7_tb;
     wire       db_tem_jogada_out ;
 
     // Configuração do clock
-    parameter clockPeriod = 1000000; // in ns, f=10kHz
+    parameter clockPeriod = 20; // in ns, f=10kHz
 
     // Identificacao do caso de teste
     reg [31:0] caso = 0;
