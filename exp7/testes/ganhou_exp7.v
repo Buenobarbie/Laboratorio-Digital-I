@@ -31,7 +31,7 @@ module ganhou_circuito_exp7_tb;
     wire       db_tem_jogada_out ;
 
     // Configuração do clock
-    parameter clockPeriod = 1000000; // in ns, f=10kHz
+    parameter clockPeriod = 20; // in ns, f=10kHz
 
     // Identificacao do caso de teste
     reg [31:0] caso = 0;
@@ -77,7 +77,7 @@ module ganhou_circuito_exp7_tb;
     memoria2[12] = 4'b0100,
     memoria2[13] = 4'b1000,
     memoria2[14] = 4'b0100,
-    memoria2[15] = 4'b0100;
+    memoria2[15] = 4'b0010;
 
     // instanciacao do DUT (Device Under Test)
     circuito_exp7 dut (
