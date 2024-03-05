@@ -1,11 +1,10 @@
 /*
-  * TEMPLATE para perder na rodada X e jogada Y
-  * Modificar linhas 105 a 107
+  * Cenario de Teste 3 - Perde por timeout na segunda jogada da Rodada 2
   */
 
 `timescale 1ns/1ns
 
-module template_perdeu;
+module timeout_circuito_exp7_tb;
 
     // Sinais para conectar com o DUT
     // valores iniciais para fins de simulacao (ModelSim)
@@ -36,49 +35,9 @@ module template_perdeu;
 
     // Identificacao do caso de teste
     reg [31:0] caso = 0;
-    reg [4:0] jogada = 0;
-    reg [4:0] rodada = 0;
 
     // Gerador de clock
     always #((clockPeriod / 2)) clock_in = ~clock_in;
-
-    //Memoria
-    wire [3:0] memoria [15:0];
-    assign memoria[0] = 4'b0001,
-    memoria[1] = 4'b0010,
-    memoria[2] = 4'b0100,
-    memoria[3] = 4'b1000,
-    memoria[4] = 4'b0100,
-    memoria[5] = 4'b0010,
-    memoria[6] = 4'b0001,
-    memoria[7] = 4'b0001,
-    memoria[8] = 4'b0010,
-    memoria[9] = 4'b0010,
-    memoria[10] = 4'b0100,
-    memoria[11] = 4'b0100,
-    memoria[12] = 4'b1000,
-    memoria[13] = 4'b1000,
-    memoria[14] = 4'b0001,
-    memoria[15] = 4'b0100;
-
-    //Memoria
-    wire [3:0] memoria2 [15:0];
-    assign memoria2[0] = 4'b0001,
-    memoria2[1] = 4'b0100,
-    memoria2[2] = 4'b0001,
-    memoria2[3] = 4'b1000,
-    memoria2[4] = 4'b1000,
-    memoria2[5] = 4'b0100,
-    memoria2[6] = 4'b0100,
-    memoria2[7] = 4'b0010,
-    memoria2[8] = 4'b0010,
-    memoria2[9] = 4'b0001,
-    memoria2[10] = 4'b0001,
-    memoria2[11] = 4'b0010,
-    memoria2[12] = 4'b0100,
-    memoria2[13] = 4'b1000,
-    memoria2[14] = 4'b0100,
-    memoria2[15] = 4'b0100;
 
     // instanciacao do DUT (Device Under Test)
     circuito_exp7 dut (
@@ -88,8 +47,8 @@ module template_perdeu;
       .botoes         ( botoes_in   ),
       .leds           ( leds_out    ),
       .pronto         ( pronto_out  ),
-      .ganhou         ( ganhou_out ),
-      .perdeu         ( perdeu_out   ),
+      .ganhou         ( ganhou_out  ),
+      .perdeu         ( perdeu_out  ),
       .db_clock       ( db_clock_out       ),
       .db_tem_jogada  ( db_tem_jogada_out  ),
       .db_igual       ( db_igual_out       ),
@@ -102,11 +61,6 @@ module template_perdeu;
       .db_estado      ( db_estado_out      )
     );
 
-    integer i, j;
-    integer jogadaPerder = 2;
-    integer rodadaPerder = 3;
-    reg [3:0] botoes_perder = 4'b0001;
-
     // geracao dos sinais de entrada (estimulos)
     initial begin
       $display("Inicio da simulacao");
@@ -117,8 +71,8 @@ module template_perdeu;
       reset_in   = 0;
       iniciar_in = 0;
       botoes_in  = 4'b0000;
-      
-      #(clockPeriod);
+      #clockPeriod;
+
 
       // Teste 1. resetar circuito
       caso = 1;
@@ -128,64 +82,61 @@ module template_perdeu;
       #(clockPeriod);
       reset_in = 0;
       // espera
-      #(10*clockPeriod);
+      #(5*clockPeriod);
 
       // Teste 2. iniciar=1 por 5 periodos de clock
       caso = 2;
       iniciar_in = 1;
-      #(5*clockPeriod);
+      #(10*clockPeriod);
       iniciar_in = 0;
-      
-      // espera mostrar a primeira jogada 
+
+      // mostra primeira jogada 
       #(2000*clockPeriod);
 
-      // -------------- LOOP DO JOGO ----------------
-      // Loop das rodadas
-      for(i=0; i<16; i = i+1) begin
-          rodada = i;
-          // Loop das jogadas
-          for(j=0; j<=i; j = j+1) begin
+      // ---------------- RODADA 1 -----------------
 
-              // PERDER
-              if(i == rodadaPerder && j == jogadaPerder) begin
-                jogada = j;
-                caso = caso + 1;
-                @(negedge clock_in);
-                botoes_in = botoes_perder;
-                #(10*clockPeriod);
-                botoes_in = 4'b0000;
-                // espera entre jogadas
-                #(10*clockPeriod);
-              end
-
-              // JOGAR
-              jogada = j;
-              caso = caso + 1;
-              @(negedge clock_in);
-              botoes_in = memoria2[j];
-              #(10*clockPeriod);
-              botoes_in = 4'b0000;
-              // espera entre jogadas
-              #(10*clockPeriod);
-          end 
-      
-          if (i < 15) begin
-          // Insere nova jogada
-              caso = caso + 1;
-              @(negedge clock_in);
-              botoes_in = memoria[15-i];
-              #(10*clockPeriod);
-              botoes_in = 4'b0000;
-              // espera entre jogadas
-              #(10*clockPeriod);
-          end
-
-      end
-     
+      // Teste 3. Rodada #1 | jogada #1 | (ajustar chaves para 0001 por 10 periodos de clock
+      caso = 3;
+      @(negedge clock_in);
+      botoes_in = 4'b0001;
       #(10*clockPeriod);
-     
+      botoes_in = 4'b0000;
+      // espera entre jogadas
+      #(10*clockPeriod);
+
+      // --------------- JOGADA NOVA ------------------
+      // ajustar chaves para 0001 por 10 periodos de clock
+      caso = 4;
+      @(negedge clock_in);
+      botoes_in = 4'b0100;
+      #(10*clockPeriod);
+      botoes_in = 4'b0000;
+      // espera entre jogadas
+      #(10*clockPeriod);
+
+      // ---------------- RODADA 2 -----------------
+
+      // Teste 5. Rodada #2 | jogada #1 | (ajustar chaves para 0001 por 10 periodos de clock
+      caso = 5;
+      @(negedge clock_in);
+      botoes_in = 4'b0001;
+      #(10*clockPeriod);
+      botoes_in = 4'b0000;
+      
+
+      // Teste 6. Rodada #2 | jogada #2 | (ajustar chaves para 0010 por 10 periodos de clock
+      caso = 6;
+      @(negedge clock_in);
+      botoes_in = 4'b0000;
+      #(5500*clockPeriod);
+      botoes_in = 4'b0000;
+      // espera entre jogadas
+      #(10*clockPeriod);
+
+      // -------------- FIM_TIMEOUT -----------------
+
       // final dos casos de teste da simulacao
-      caso = 200;
+      caso = 99;
       #100;
       $display("Fim da simulacao");
       $stop;
