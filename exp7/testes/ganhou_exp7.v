@@ -35,6 +35,8 @@ module ganhou_circuito_exp7_tb;
 
     // Identificacao do caso de teste
     reg [31:0] caso = 0;
+    reg [4:0] jogada = 0;
+    reg [4:0] rodada = 0;
 
     // Gerador de clock
     always #((clockPeriod / 2)) clock_in = ~clock_in;
@@ -136,9 +138,10 @@ module ganhou_circuito_exp7_tb;
       // -------------- LOOP DO JOGO ----------------
       // Loop das rodadas
       for(i=0; i<16; i = i+1) begin
-
+          rodada = i;
           // Loop das jogadas
           for(j=0; j<=i; j = j+1) begin
+              jogada = j;
               caso = caso + 1;
               @(negedge clock_in);
               botoes_in = memoria2[j];
