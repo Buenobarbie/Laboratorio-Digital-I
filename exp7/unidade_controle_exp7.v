@@ -104,17 +104,17 @@ module unidade_controle_exp7 (
         case (Eatual)
             inicial:              db_estado = inicial;         // 0
             preparacao:           db_estado = preparacao;      // 1
-            exibe_jogada_inicial: db_estado = exibe_jogada_inicial; // F
-            inicia_rodada:        db_estado = inicia_rodada;   // 2
-            espera_jogada:        db_estado = espera_jogada;   // 3
-            registra:             db_estado = registra;        // 4
-            comparacao:           db_estado = comparacao;      // 5
-            proximo:              db_estado = proximo;         // 6
-            ultima_rodada:        db_estado = ultima_rodada;   // 7
-            proxima_rodada:       db_estado = proxima_rodada;  // 8
+            exibe_jogada_inicial: db_estado = exibe_jogada_inicial; // 2
+            inicia_rodada:        db_estado = inicia_rodada;   // 3
+            espera_jogada:        db_estado = espera_jogada;   // 4
+            registra:             db_estado = registra;        // 5
+            comparacao:           db_estado = comparacao;      // 6
+            proximo:              db_estado = proximo;         // 7
+            ultima_rodada:        db_estado = ultima_rodada;   // 8
             espera_nova_jogada:   db_estado = espera_nova_jogada; // 9
             registra_nova_jogada: db_estado = registra_nova_jogada; // B
             escreve_memoria:      db_estado = escreve_memoria; // D
+            proxima_rodada:       db_estado = proxima_rodada;  // F
             fim_errou:            db_estado = fim_errou;       // E
             fim_acertou:          db_estado = fim_acertou;     // A
             fim_timeout:          db_estado = fim_timeout;     // C
