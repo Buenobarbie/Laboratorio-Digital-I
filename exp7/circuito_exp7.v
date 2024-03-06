@@ -16,7 +16,8 @@ module circuito_exp7 (
  output [6:0] db_memoria,
  output [6:0] db_jogadafeita,
  output [6:0] db_rodada,
- output [6:0] db_estado
+ output [6:0] db_estado,
+ output       db_estado_extra
 );
 
 wire fimE;
@@ -80,6 +81,7 @@ unidade_controle_exp7 unidade_controle(
     .timeout   (db_timeout),
 	.pronto    (pronto),
 	.db_estado (estado_out),
+	.db_estado_extra(db_estado_extra),
 	.sinal_led (sinal_led)
 ); 
 

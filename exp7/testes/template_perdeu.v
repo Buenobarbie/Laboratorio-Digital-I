@@ -30,6 +30,7 @@ module template_perdeu;
     wire [6:0] db_rodada_out     ;
     wire       db_clock_out      ;
     wire       db_tem_jogada_out ;
+    wire       db_estado_extra_out;
 
     // Configuração do clock
     parameter clockPeriod = 20; // in ns, f=10kHz
@@ -99,7 +100,8 @@ module template_perdeu;
       .db_memoria     ( db_memoria_out     ),
       .db_jogadafeita ( db_jogadafeita_out ),  
       .db_rodada      ( db_rodada_out      ),
-      .db_estado      ( db_estado_out      )
+      .db_estado      ( db_estado_out      ),
+      .db_estado_extra(db_estado_extra_out)
     );
 
     integer i, j;
